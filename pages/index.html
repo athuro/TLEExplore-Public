@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLEExplorer</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico?v=1">
+    <link rel="stylesheet" href="../styles/style.css">
+    <script src="https://kit.fontawesome.com/c74734f802.js" crossorigin="anonymous"></script>
+
+    <!-- Fancy astrodynamics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.0.0/satellite.min.js"></script>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <ul class="navigationBar">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./list.html">API Sat List</a></li>
+            <li><a href="https://github.com/athuro/sdi-blended-project1-scaffold">About</a></li>
+        </ul>
+    </header>
+
+    <h1 id="overallTitleBlock">
+        <button id="randomStarlink" type="submit">
+            <i class="fa-solid fa-satellite"> Explore  Starlink </i>  
+        </button>
+        <div id="title">TLEExplorer</div>
+        <div class="loader" id="loaderRight"><i class="fa-solid fa-earth-americas fa-spin"></i></div>
+    </h1>
+
+    <section class="searchSection">
+        <input class="searchTerm" type="text" placeholder="Search by object name or 5-digit NORAD ID, e.g. ISS (ZARYA) or 26609"> 
+        <button type="submit" class="searchButton">
+            <i class="fa-solid fa-satellite-dish"></i>    
+        </button>
+        <div class="popup" onclick="notFound()">
+            <span class="popuptext" id="myPopup">Object not found, try again!</span>
+        </div>  
+        <div class="popup" onclick="notSpecific()">
+            <span class="popuptext" id="specificityPopup"></span>
+        </div> 
+        <div class="popup" onclick="noOrbit()">
+            <span class="popuptext" id="orbitPopup">Orbject has likely deorbited since epoch</span>
+        </div> 
+    </section>
+ 
+    <article class="searchResults">
+        <section class="content">
+            <h2 id="satName"></h2>
+            <h3 id="satID"></h3>
+            <h4 id="TLE"></h4>
+            <section id="dataFromTLE">
+                <table>
+                    <thead>
+                        <tr class="tableHeader">
+                            <th colspan="2"> Orbital Elements </th>
+                        </tr>
+                    </thead>
+                    <tbody class="el">
+                        <tr>
+                            <td>Semi major axis (km)</td>
+                            <td id="a"></td>
+                        </tr>
+                        <tr>
+                            <td>Inclination (deg)</td>
+                            <td  id="i"></td>
+                        </tr>
+                        <tr>
+                            <td>Eccentricity</td>
+                            <td id="e"></td>
+                        </tr>
+                        <tr>
+                            <td>Mean Anomaly (deg)</td>
+                            <td id="m"></td>
+                        </tr>
+                        <tr>
+                            <td>Argument of Perigee (deg)</td>
+                            <td id="omega"></td>
+                        </tr>
+                        <tr>
+                            <td>RAAN (deg)</td>
+                            <td id="raan"></td>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr class="tableHeader">
+                            <th colspan="2"> Object Information </th>
+                        </tr>
+                    </thead>
+                    <tbody class="el">
+                        <tr>
+                            <td>Epoch</td>
+                            <td id="epoch"></td>
+                        </tr>
+                        <tr>
+                            <td>Period (minutes)</td>
+                            <td id="T"></td>
+                        </tr>
+                        <tr>
+                            <td>Launch Year</td>
+                            <td id="launch"></td>
+                        </tr>
+                        <tr>
+                            <td>Total Orbits</td>
+                            <td id="orbits"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+
+        <section id="diagram">
+            <div id="cesiumContainer"></div> 
+            <button class="viewer" id="clearGlobe" type="submit">
+                <i class="fa-solid fa-globe"></i> 
+                   Clear Viewer      
+            </button>
+            <button class="viewer" id="addPath" type="submit"> 
+                <i class="fa-solid fa-plus"></i> 
+                   Add Pass 
+            </button>
+        </section>
+    </article>
+
+
+    <script src="../scripts/index.js"></script>
+</body>
+</html>

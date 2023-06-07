@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLE Sort</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico?v=1">
+    <link rel="stylesheet" href="../styles/style.css">
+    <script src="https://kit.fontawesome.com/c74734f802.js" crossorigin="anonymous"></script>
+
+    <!-- Fancy astrodynamics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.0.0/satellite.min.js"></script>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <ul class="navigationBar">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./list.html">API Sat List</a></li>
+            <li><a href="https://github.com/athuro/sdi-blended-project1-scaffold">About</a></li>
+        </ul>
+    </header>
+
+    <h1 id="overallTitleBlock">
+        <button id="randomStarlink" type="submit">
+        </button>
+        <div id="title">TLEExplorer</div>
+        <div class="loader" id="loaderRight"><i class="fa-solid fa-earth-americas fa-spin"></i></div>
+    </h1>
+
+    <section class="searchSection">
+        <input class="searchTerm" id="searchIin" type="text" placeholder="Sort objects by inclination, e.g. <50 or >95"> 
+        <button type="submit" id="searchI" class="searchButton">
+            <i class="fa-solid fa-slash"></i>   
+        </button>
+        
+        <input class="searchTerm" id="searchEin" type="text" placeholder="Sort objects by eccentricity, e.g. >0.01 or <0.5"> 
+        <button type="submit" id="searchE" class="searchButton">
+            <i class="fa-regular fa-circle"></i>
+        </button>      
+ 
+        <input class="searchTerm" id="searchTin" type="text" placeholder="Sort objects by period, e.g. <105 or >255"> 
+        <button type="submit" id="searchT" class="searchButton">
+            <i class="fa-solid fa-clock"></i>  
+        </button>
+        <div class="popup" onclick="notFound()">
+            <span class="popuptext" id="myPopup">Object not found, try again!</span>
+        </div>  
+        <div class="popup" onclick="tryAgain()">
+            <span class="popuptext" id="wrongOp">The first character must be the > or < operator</span>
+        </div> 
+
+    </section>
+ 
+    <article class="sortResults">
+        <section class="content">
+            <button class = 'order' id="ascend" type="submit">
+                <i class="fa-solid fa-arrow-up"></i> 
+                Ascending 
+            </button>
+            <button class="order" id="descend" type="submit">
+                <i class="fa-solid fa-arrow-down"></i> 
+                Descending 
+            </button>
+            <button class="order" id="lastPage" type="submit">
+                <i class="fa-solid fa-arrow-left"></i> 
+                Previous Page 
+            </button>
+            <span id="pageNumber"></span>
+            <button class="order" id="nextPage" type="submit">
+                Next Page 
+                <i class="fa-solid fa-arrow-right"></i> 
+            </button>
+            <h2 id="sortTitle"> </h2>
+
+            <section id="dataFromTLE">
+                <table>
+                    <thead>
+                        <tr class="tableHeader">
+                            <th>Name</th>
+                            <th>NORAD ID</th>
+                            <th>Semi-major Axis (km) </th>
+                            <th>Inclination (deg)</th>
+                            <th>Eccentricity</th>
+                            <th>Mean Anomaly (deg)</th>
+                            <th>Argument of Perigee (deg)</th>
+                            <th>RAAN (deg)</th>
+                            <th>Epoch</th>
+                            <th>Period (min)</th>
+                            <th>Launch Year</th>
+                            <th>Total Orbits</th>
+                        </tr>
+                    </thead>
+                    <tbody class="el">
+                    </tbody>
+                </table>
+            </section>
+        </section>
+    </article>
+
+
+    <script src="../scripts/list.js"></script>
+</body>
+</html>
